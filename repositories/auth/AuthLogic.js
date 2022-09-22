@@ -4,10 +4,10 @@ import activations from "../../database/models/activation";
 import patients from "../../database/models/patient";
 import users from "../../database/models/user";
 import { addSeconds, bcryptPassword, generateRandomInt } from "../../helpers";
-import { comparePassword, comparePassword } from "../../helpers/bcrypt";
+import { comparePassword } from "../../helpers/bcrypt";
 import { EMAIL_ALREADY_EXISTS, EMAIL_NOT_FOUND, ERR_ACCOUNT_BANNED, ERR_ACCOUNT_PENDING, ERR_AUTH_PASSWORD_NOT_MATCH, ERR_CREATE_ACTIVATION, ERR_CREATE_USER, ERR_PASSWORD_NOT_SAME, ERR_SAVE_PATIENT_INFORMATION } from "../../helpers/Constant/errorConstant";
-import { PATIENT } from "../../helpers/Constant/roleConstant";
-import { BANNED, PENDING } from "../../helpers/Constant/statusConstant";
+import { PATIENT_ID } from "../../helpers/Constant/roleConstant";
+import { BANNED, BANNED_ID, PENDING, PENDING_ID } from "../../helpers/Constant/statusConstant";
 import { errorResponse, successResponse } from "../../helpers/response";
 import { generateToken } from "../../middleware/auth/authentication";
 import { userCreate } from "../../parsers/user";
@@ -16,28 +16,28 @@ import { userCreate } from "../../parsers/user";
 export const loginLogic = async (userBody, res) => {
     try {
 
-        const user = await users.findOne({where: {email: userBody.email}})
+        const user = await users.findOne({where: {email: userBody.email}, raw: true})
         if (!user) {
             return errorResponse(res, 400, EMAIL_NOT_FOUND)
         }
 
-        if (user.status === PENDING) {
+        if (user.status === PENDING_ID) {
             return errorResponse(res, 400, ERR_ACCOUNT_PENDING)
         }
 
-        if (user.status === BANNED) {
+        if (user.status === BANNED_ID) {
             return errorResponse(res, 400, ERR_ACCOUNT_BANNED)
         }
 
-        // const passwordCheck = await comparePassword(userBody.password, user.password)
-        // if (!passwordCheck) {
-        //     return errorResponse(res, 400, ERR_AUTH_PASSWORD_NOT_MATCH)
-        // }
+        const passwordCheck = await comparePassword(userBody.password, user.password)
+        if (!passwordCheck) {
+            return errorResponse(res, 400, ERR_AUTH_PASSWORD_NOT_MATCH)
+        }
 
         // TODO generate token jwt
-        // const token = generateToken(user);
+        const token = await generateToken(user);
 
-        // return successResponse(res, "Login Success", token)
+        return successResponse(res, "Login Success", token)
         
 
     } catch (error) {
@@ -131,8 +131,8 @@ const createUser = async (body, t) => {
     return users.create({
         email: body.email,
         password: await bcryptPassword(body.password),
-        role: PATIENT,
-        status: PENDING,
+        role: PATIENT_ID,
+        status: PENDING_ID,
     }, {transaction: t})
 }
 
@@ -144,7 +144,7 @@ const createActivation = async (t, user) => {
     }, {transaction: t})
 }
 
-async function createPatient (body, t, user) {
+const createPatient = async (body, t, user) => {
     
     let patient = patients.create({
         userId: user.id,

@@ -16,3 +16,14 @@ export const ERR_CREATE_ACTIVATION = "Error creating activation!"
 export const ERR_AUTH_PASSWORD_NOT_MATCH = "Error password not match!"
 
 export const ERR_VALIDATION = "Error Validation!"
+export const UNKNOWN = "unknown"
+
+
+/**
+ * 
+ * Patients
+ * 
+ */
+
+export const ERR_PATIENT_NOT_FOUND = "Error patient data not found!"
+export const ERR_PATIENT_NULL = "Error patient is empity!"

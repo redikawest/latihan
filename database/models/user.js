@@ -1,5 +1,6 @@
 import { Model, Sequelize } from "sequelize";
 import maindb from "../../config/sequelize";
+import patients from "./patient";
 
 const {DataTypes} = Sequelize;
 
@@ -32,5 +33,9 @@ const users = maindb.define('users',{
     },
     freezeTableName: true,
 });
+
+users.associate = () => {
+    users.hasOne(patients, {foreignKey: 'userId', as:'patient'})
+}
 
 export default users;

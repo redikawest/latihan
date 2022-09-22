@@ -13,4 +13,4 @@ routes.post("/verivy-token", validate(authValidation.verifyToken), authControlle
 routes.post("/forgot-password", validate(authValidation.forgotPassword), authController.forgotPassword)
 routes.put("/request-token", validate(authValidation.requestToken), authController.requestToken)
 
-export { routes as auth };
+export default routes;
