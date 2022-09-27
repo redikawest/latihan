@@ -1,13 +1,13 @@
 import { logger } from "../../config/logger";
 import maindb from "../../config/sequelize";
-import activations from "../../database/models/activation";
+import Activations from "../../database/models/activation";
 import patients from "../../database/models/patient";
 import users from "../../database/models/user";
 import { addSeconds, bcryptPassword, generateRandomInt } from "../../helpers";
 import { comparePassword } from "../../helpers/bcrypt";
 import { EMAIL_ALREADY_EXISTS, EMAIL_NOT_FOUND, ERR_ACCOUNT_BANNED, ERR_ACCOUNT_PENDING, ERR_AUTH_PASSWORD_NOT_MATCH, ERR_CREATE_ACTIVATION, ERR_CREATE_USER, ERR_PASSWORD_NOT_SAME, ERR_SAVE_PATIENT_INFORMATION } from "../../helpers/Constant/errorConstant";
 import { PATIENT_ID } from "../../helpers/Constant/roleConstant";
-import { BANNED, BANNED_ID, PENDING, PENDING_ID } from "../../helpers/Constant/statusConstant";
+import { BANNED_ID, PENDING_ID } from "../../helpers/Constant/statusConstant";
 import { errorResponse, successResponse } from "../../helpers/response";
 import { generateToken } from "../../middleware/auth/authentication";
 import { userCreate } from "../../parsers/user";
@@ -137,7 +137,7 @@ const createUser = async (body, t) => {
 }
 
 const createActivation = async (t, user) => {
-    return activations.create({
+    return Activations.create({
         userId: user.id,
         token: generateRandomInt(6),
         expireTime: addSeconds(180),

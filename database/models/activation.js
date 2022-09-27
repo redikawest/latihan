@@ -1,6 +1,6 @@
 import maindb from "../../config/sequelize";
 
-const activations = maindb.define('user_activations',{
+const Activations = maindb.define('user_activations',{
     id: {
         allowNull: false,
         primaryKey: true,
@@ -29,4 +29,4 @@ const activations = maindb.define('user_activations',{
     freezeTableName: true,
 })
 
-export default activations;
+export default Activations;

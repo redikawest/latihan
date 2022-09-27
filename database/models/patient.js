@@ -1,7 +1,7 @@
 import maindb from "../../config/sequelize";
-import users from "./user";
+import Users from "./user";
 
-const patients = maindb.define('patients',{
+const Patients = maindb.define('patients',{
     id: {
         allowNull: false,
         autoIncrement: true,
@@ -41,10 +41,6 @@ const patients = maindb.define('patients',{
         type: maindb.Sequelize.BOOLEAN,
         allowNull: false
     },
-    images: {
-        type: maindb.Sequelize.STRING,
-        allowNull: true,
-    },
     address: {
         type: maindb.Sequelize.STRING,
         allowNull: false
@@ -69,8 +65,6 @@ const patients = maindb.define('patients',{
     freezeTableName: true,
 })
 
-patients.associate = () => {
-    patients.belongsTo(users, {foreignKey: 'userId', as: 'user'})
-}
+Patients.belongsTo(Users)
 
-export default patients;
+export default Patients;

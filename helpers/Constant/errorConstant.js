@@ -27,3 +27,28 @@ export const UNKNOWN = "unknown"
 
 export const ERR_PATIENT_NOT_FOUND = "Error patient data not found!"
 export const ERR_PATIENT_NULL = "Error patient is empity!"
+
+
+/**
+ * 
+ * Conditions
+ * 
+ */
+export const ERR_CONDITIONS_NOT_FOUND = "Error conditions not found!"
+export const ERR_CONDITIONS_NULL = "Error conditions is empity!"
+export const ERR_CONDITIONS_EXIST = "Error conditions is exist!"
+export const ERR_CONDITION_CREATE = "Error create condition!"
+export const ERR_CONDITION_UPDATE = "Error update condition!"
+export const ERR_CONDITION_DELETE = "Error delete condition!"
+
+/**
+ * 
+ * Categories
+ * 
+ */
+export const ERR_CATEGORY_NOT_FOUND = "Error categories not found!"
+export const ERR_CATEGORY_NULL = "Error categories is empity!"
+export const ERR_CATEGORY_EXIST = "Error category is exist!"
+export const ERR_CATEGORY_CREATE = "Error create category!"
+export const ERR_CATEGORY_UPDATE = "Error update category!"
+export const ERR_CATEGORY_DELETE = "Error delete category!"
