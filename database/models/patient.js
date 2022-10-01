@@ -65,6 +65,7 @@ const Patients = maindb.define('patients',{
     freezeTableName: true,
 })
 
+Users.hasOne(Patients)
 Patients.belongsTo(Users)
 
 export default Patients;
