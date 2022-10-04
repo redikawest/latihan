@@ -1,6 +1,6 @@
 import Joi from "joi";
-import { errorResponse } from "../../helpers"
 import { ERR_VALIDATION } from "../../helpers/Constant/errorConstant"
+import { errorResponse } from "../../helpers/response";
 import { pick } from "../../utils/pick";
 
 // function validate (req, res, next) {

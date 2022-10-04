@@ -14,11 +14,11 @@ module.exports = {
           type: Sequelize.STRING
         },
         description: {
-          allowNull: false,
+          allowNull: true,
           type: Sequelize.TEXT
         },
         createdBy: {
-          allowNull: true,
+          allowNull: false,
           type: Sequelize.STRING
         },
         createdAt: {
@@ -29,7 +29,7 @@ module.exports = {
           allowNull: false,
           type: Sequelize.DATE
         },
-        deleteAt: {
+        deletedAt: {
           allowNull: true,
           type: Sequelize.DATE
         }

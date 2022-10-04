@@ -1,8 +1,8 @@
-export const successResponse = (res, message, data) => {
+export const successResponse = (res, message, result) => {
     return res.status(200).send({ 
         success: true,
         message,
-        data,
+        result,
     });
 }
 

@@ -21,6 +21,7 @@ const Conditions = maindb.define('conditions',{
     }
 }, {
     freezeTableName: true,
+    paranoid: true
 })
 
 export default Conditions;

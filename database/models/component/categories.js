@@ -7,9 +7,18 @@ const Categories = maindb.define('categories',{
         type: maindb.Sequelize.INTEGER,
         autoIncrement: true
     },
-}, {
-    freezeTableName: true,
-    paranoid: true
-})
+    name: {
+        allowNull: false,
+        type: maindb.Sequelize.STRING,
+    },
+    description: {
+        allowNull: true,
+        type: maindb.Sequelize.TEXT,
+    },
+    createdBy: {
+        allowNull: false,
+        type: maindb.Sequelize.STRING,
+    }
+}, { freezeTableName: true, paranoid: true })
 
 export default Categories;
