@@ -1,3 +1,5 @@
+export const SUCCESS = "Success"
+
 /**
  * 
  * COMPONENT CATEGORY

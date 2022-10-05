@@ -1,4 +1,6 @@
+import { Op } from "sequelize";
 import maindb from "../../../config/sequelize";
+import * as categoryParser from "../../../parsers/component/categoryParser"
 
 const Categories = maindb.define('categories',{
     id: {
@@ -20,5 +22,27 @@ const Categories = maindb.define('categories',{
         type: maindb.Sequelize.STRING,
     }
 }, { freezeTableName: true, paranoid: true })
+
+
+/**
+ * 
+ * Function
+ * 
+ */
+
+Categories.prototype.filter = async function(limit, offset, search) {
+    let result = await Categories.findAndCountAll({
+        limit: limit,
+        offset: offset,
+        where: {
+            [Op.or]: {
+                name: { [Op.like]: `%${search}%` },
+                description: { [Op.like]: `%${search}%` }
+            }
+        }
+    })
+
+    return categoryParser.basic(result)
+}
 
 export default Categories;

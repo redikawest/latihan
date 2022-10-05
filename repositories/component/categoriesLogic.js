@@ -1,31 +1,20 @@
 import { logger } from "../../config/logger"
 import Categories from "../../database/models/component/categories"
 import { ERR_CATEGORY_CREATE, ERR_CATEGORY_DELETE, ERR_CATEGORY_EXIST, ERR_CATEGORY_NOT_FOUND, ERR_CATEGORY_UPDATE } from "../../helpers/Constant/errorConstant"
-import { SUCCESS_CATEGORY_DELETE, SUCCESS_CATEGORY_UPDATE, SUCCESS_CREATE_CATEGORY } from "../../helpers/Constant/successConstant"
+import { SUCCESS, SUCCESS_CATEGORY_DELETE, SUCCESS_CATEGORY_UPDATE, SUCCESS_CREATE_CATEGORY } from "../../helpers/Constant/successConstant"
 import { createData, getDataWhere, getPagingData, pagination, updateData } from "../../helpers/query"
 import { errorResponse, successResponse } from "../../helpers/response"
 import { parseStringifyData } from "../../utils/parse"
 import * as parser from "../../parsers/component/categoryParser"
 import * as request from "./request/categoryRequest"
-import { Op } from "sequelize"
 
 export const gets = async (req, res) => {
     const { page, size, search } = req.query;
     const { limit, offset } = await pagination(page, size);
-    const test = await Categories.filter()
-    return res.send(test)
     
-    const data = await Categories.findAndCountAll({
-        limit: limit, offset: offset, 
-        where: {
-            [Op.or]: {
-                name: { [Op.like]: `%${search}%` },
-                description: { [Op.like]: `%${search}%` }
-            }
-        }
-    })
+    const data = await Categories.prototype.filter(limit, offset, search)
     const result = await getPagingData(data, page, limit)
-    return successResponse(res, 'oke', result)
+    return successResponse(res, SUCCESS, result)
 }
 
 export const get = async (categoryId, res) => {
@@ -43,7 +32,7 @@ export const create = async (body, res) => {
         
         const category = await getDataWhere(Categories, 'name', body.name)
         if (category) {
-            return errorResponse(res, 401, ERR_CATEGORY_EXIST)
+            return errorResponse(res, 409, ERR_CATEGORY_EXIST)
         }
 
         const create = await createData(Categories, parseStringifyData(request.create(body)))
@@ -64,7 +53,7 @@ export const update = async (body, categoryId, res) => {
         
         const category = await getDataWhere(Categories, 'id', categoryId)
         if (!category) {
-            return errorResponse(res, 401, ERR_CATEGORY_NOT_FOUND)
+            return errorResponse(res, 404, ERR_CATEGORY_NOT_FOUND)
         }
 
         const update = await updateData(category, parseStringifyData(request.create(body)))
@@ -85,7 +74,7 @@ export const deleted = async (categoryId, res) => {
         
         const category = await getDataWhere(Categories, 'id', categoryId)
         if (!category) {
-            return errorResponse(res, 401, ERR_CATEGORY_NOT_FOUND)
+            return errorResponse(res, 404, ERR_CATEGORY_NOT_FOUND)
         }
 
         const deleted = await category.destroy()
