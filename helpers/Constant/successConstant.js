@@ -1,4 +1,19 @@
+/**
+ * 
+ * GLOBAL
+ * 
+ */
 export const SUCCESS = "Success"
+
+
+/**
+ *
+ * USER
+ *
+ */
+
+export const SUCCESS_LOGIN = "Login Success"
+
 
 /**
  * 

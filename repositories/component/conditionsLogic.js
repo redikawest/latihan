@@ -4,7 +4,7 @@ import { ERR_CONDITIONS_EXIST, ERR_CONDITIONS_NOT_FOUND, ERR_CONDITION_CREATE, E
 import { SUCCESS_CONDITION_CREATE, SUCCESS_CONDITION_DELETE, SUCCESS_CONDITION_UPDATE } from "../../helpers/Constant/successConstant"
 import { createData, getDataWhere, updateData } from "../../helpers/query"
 import { errorResponse, successResponse } from "../../helpers/response"
-import * as conditionRequest from "./request/conditionRequest"
+import * as conditionRequest from "./request/componentRequest"
 import * as parser from "../../parsers/component/conditionParser"
 import { parseStringifyData } from "../../utils/parse"
 

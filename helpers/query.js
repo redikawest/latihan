@@ -10,8 +10,9 @@ export const getDataWhere = async (model, source, value) => {
     return await model.findOne(option)
 }
 
-export const createData = async (model, body) => {
-    let result = await model.create(body)
+export const createData = async (model, body, transaction) => {
+    
+    let result = await model.create(body, {transaction: transaction})
 
     return result
 }
