@@ -2,14 +2,15 @@ import bodyParser from "body-parser";
 import express from "express";
 import morganBody from "morgan-body";
 import dotenv from "dotenv";
-import { routes } from "./config/routes";
+import router from "./routes/index"
 dotenv.config()
 
 const app = express();
 
 morganBody(app);
 app.use(bodyParser.json({ limit: '5mb', extended: true, type: 'application/json' }));
-routes(app);
+// router(app);
+app.use(router)
 
 app.get('/', (req, res) => {
     res.send('Hello World!')

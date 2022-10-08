@@ -30,11 +30,11 @@ module.exports = {
           allowNull: true,
       },
       sex: {
-          type: Sequelize.STRING,
+          type: Sequelize.INTEGER,
           allowNull: true
       },
       salutation: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: true
       },
       isMarried: {
@@ -50,7 +50,7 @@ module.exports = {
         allowNull: true
       },
       identityType: {
-          type: Sequelize.STRING,
+          type: Sequelize.INTEGER,
           allowNull: true,
       },
       identityId: {
@@ -58,7 +58,7 @@ module.exports = {
           allowNull: true,
       },
       religion: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: true
       },
       createdAt: {
@@ -69,7 +69,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      deleteAt: {
+      deletedAt: {
         allowNull: true,
         type: Sequelize.DATE
       }

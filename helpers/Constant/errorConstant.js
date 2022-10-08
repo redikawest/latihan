@@ -17,6 +17,8 @@ export const ERR_AUTH_PASSWORD_NOT_MATCH = "Error password not match!"
 
 export const ERR_VALIDATION = "Error Validation!"
 export const UNKNOWN = "unknown"
+export const ERR_AUTHORIZATION = "No Token Provide!"
+export const ERR_INVALID_TOKEN = "Invalid Token!"
 
 
 /**

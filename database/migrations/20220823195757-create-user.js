@@ -17,11 +17,11 @@ module.exports = {
           allowNull: false,
       },
       role: {
-          type: Sequelize.STRING,
+          type: Sequelize.INTEGER,
           allowNull: false,
       },
       status: {
-          type: Sequelize.STRING,
+          type: Sequelize.INTEGER,
           allowNull: false
       },
       createdAt: {
@@ -32,7 +32,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      deleteAt: {
+      deletedAt: {
         allowNull: true,
         type: Sequelize.DATE
       }

@@ -5,7 +5,7 @@ import { SUCCESS_CONDITION_CREATE, SUCCESS_CONDITION_DELETE, SUCCESS_CONDITION_U
 import { createData, getDataWhere, updateData } from "../../helpers/query"
 import { errorResponse, successResponse } from "../../helpers/response"
 import * as conditionRequest from "./request/componentRequest"
-import * as parser from "../../parsers/component/conditionParser"
+import * as parser from "../../parsers/component/componentParser"
 import { parseStringifyData } from "../../utils/parse"
 
 export const gets = async () => {
@@ -30,9 +30,6 @@ export const create = async (body, res) => {
         }
         
         const create = await createData(Conditions, parseStringifyData(conditionRequest.create(body)))
-        if (!create) {
-            return errorResponse(res, 500, ERR_CONDITION_CREATE)
-        }
 
         return successResponse(res, SUCCESS_CONDITION_CREATE, parser.basic(create))
 
@@ -51,11 +48,8 @@ export const update = async (body, conditionId, res) => {
         }
 
         const update = await updateData(condition, parseStringifyData(conditionRequest.create(body)))
-        if (!update) {
-            return errorResponse(res, 400, ERR_CONDITION_UPDATE)
-        }
 
-        return successResponse(res, SUCCESS_CONDITION_UPDATE, parser.basic(condition))
+        return successResponse(res, SUCCESS_CONDITION_UPDATE, parser.basic(update))
 
     } catch (error) {
         logger.log({level: 'info', message: error})
@@ -70,12 +64,10 @@ export const deleted = async (conditionId, res) => {
         if (!condition) {
             return errorResponse(res, 400, ERR_CONDITIONS_NOT_FOUND)
         }
-        const deleted = await condition.destroy()
-        if (!deleted) {
-            return errorResponse(res, 400, ERR_CONDITION_DELETE)
-        }
 
-        return successResponse(res, SUCCESS_CONDITION_DELETE, parser.basic(deleted))
+        await condition.destroy()
+
+        return successResponse(res, SUCCESS_CONDITION_DELETE)
         
     } catch (error) {
         logger.log({level: 'info', message: error})

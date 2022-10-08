@@ -28,10 +28,8 @@ const Users = maindb.define('users',{
         allowNull: true
     },
 },{
-    scopes: {
-
-    },
     freezeTableName: true,
+    paranoid: true
 });
 
 

@@ -1,8 +1,9 @@
 import express from "express";
-import * as conditionController from "../controllers/component/conditionController"
-import * as categoryController from "../controllers/component/categoriesController"
-import * as componentValidation from "../middleware/validation/component"
-import validate from "../middleware/validation/validate";
+import * as conditionController from "../../../controllers/component/conditionController"
+import * as categoryController from "../../../controllers/component/categoriesController"
+import * as componentValidation from "../../../middleware/validation/component"
+import validate from "../../../middleware/validation/validate";
+import { verifyToken } from "../../../middleware/auth/authentication";
 
 const routes = express.Router();
 
