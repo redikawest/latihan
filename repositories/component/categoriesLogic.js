@@ -27,7 +27,7 @@ export const get = async (categoryId, res) => {
 
 }
 
-export const create = async (body, res) => {
+export const create = async (body, user, res) => {
     try {
         
         const category = await getDataWhere(Categories, 'name', body.name)
@@ -35,7 +35,7 @@ export const create = async (body, res) => {
             return errorResponse(res, 409, ERR_CATEGORY_EXIST)
         }
 
-        const create = await createData(Categories, parseStringifyData(request.create(body)))
+        const create = await createData(Categories, parseStringifyData(request.create(body, user)))
 
         return successResponse(res, SUCCESS_CATEGORY_CREATE, parser.basic(create))
 

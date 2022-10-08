@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const generateToken = async (payload) => {
-
     const token = await jwt.sign(payload, process.env.SECRET_KEY);
 
     return token

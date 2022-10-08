@@ -1,7 +1,7 @@
 import * as conditionLogic from "../../repositories/component/conditionsLogic";
 
 export const gets = async (req, res) => {
-    return res.send('gets')
+    return conditionLogic.gets(req, res)
 }
 
 export const get = async (req, res) => {
@@ -9,7 +9,7 @@ export const get = async (req, res) => {
 }
 
 export const create = async (req, res) => {
-    return conditionLogic.create(req.body, res)
+    return conditionLogic.create(req.body, req.user, res)
 }
 
 export const update = async (req, res) => {

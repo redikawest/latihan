@@ -1,15 +1,20 @@
 import { logger } from "../../config/logger"
 import Conditions from "../../database/models/component/conditions"
 import { ERR_CONDITIONS_EXIST, ERR_CONDITIONS_NOT_FOUND, ERR_CONDITION_CREATE, ERR_CONDITION_DELETE, ERR_CONDITION_UPDATE } from "../../helpers/Constant/errorConstant"
-import { SUCCESS_CONDITION_CREATE, SUCCESS_CONDITION_DELETE, SUCCESS_CONDITION_UPDATE } from "../../helpers/Constant/successConstant"
-import { createData, getDataWhere, updateData } from "../../helpers/query"
+import { SUCCESS, SUCCESS_CONDITION_CREATE, SUCCESS_CONDITION_DELETE, SUCCESS_CONDITION_UPDATE } from "../../helpers/Constant/successConstant"
+import { createData, getDataWhere, getPagingData, pagination, updateData } from "../../helpers/query"
 import { errorResponse, successResponse } from "../../helpers/response"
 import * as conditionRequest from "./request/componentRequest"
 import * as parser from "../../parsers/component/componentParser"
 import { parseStringifyData } from "../../utils/parse"
 
-export const gets = async () => {
-
+export const gets = async (req, res) => {
+    const { page, size, search } = req.query;
+    const { limit, offset } = await pagination(page, size);
+    
+    const data = await Conditions.prototype.filter(limit, offset, search)
+    const result = await getPagingData(data, page, limit)
+    return successResponse(res, SUCCESS, result)
 }
 
 export const get = async (conditionId, res) => {
@@ -21,7 +26,7 @@ export const get = async (conditionId, res) => {
     return successResponse(res, null, parser.basic(condition))
 }
 
-export const create = async (body, res) => {
+export const create = async (body, user, res) => {
     try {
 
         const condition = await getDataWhere(Conditions, 'name', body.name)
@@ -29,7 +34,7 @@ export const create = async (body, res) => {
             return errorResponse(res, 400, ERR_CONDITIONS_EXIST)
         }
         
-        const create = await createData(Conditions, parseStringifyData(conditionRequest.create(body)))
+        const create = await createData(Conditions, parseStringifyData(conditionRequest.create(body, user)))
 
         return successResponse(res, SUCCESS_CONDITION_CREATE, parser.basic(create))
 
@@ -47,7 +52,7 @@ export const update = async (body, conditionId, res) => {
             return errorResponse(res, 400, ERR_CONDITIONS_NOT_FOUND)
         }
 
-        const update = await updateData(condition, parseStringifyData(conditionRequest.create(body)))
+        const update = await updateData(condition, parseStringifyData(body))
 
         return successResponse(res, SUCCESS_CONDITION_UPDATE, parser.basic(update))
 

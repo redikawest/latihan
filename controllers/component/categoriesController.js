@@ -9,7 +9,7 @@ export const get = async (req, res) => {
 }
 
 export const create = async (req, res) => {
-    return categoryLogic.create(req.body, res)
+    return categoryLogic.create(req.body, req.user, res)
 }
 
 export const update = async (req, res) => {

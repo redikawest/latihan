@@ -1,4 +1,6 @@
+import { Op } from "sequelize";
 import maindb from "../../../config/sequelize";
+import * as componentParser from "../../../parsers/component/componentParser"
 
 const Conditions = maindb.define('conditions',{
     id: {
@@ -23,5 +25,26 @@ const Conditions = maindb.define('conditions',{
     freezeTableName: true,
     paranoid: true
 })
+
+/**
+ * 
+ * Function
+ * 
+ */
+
+ Conditions.prototype.filter = async function(limit, offset, search) {
+    let result = await Conditions.findAndCountAll({
+        limit: limit,
+        offset: offset,
+        where: {
+            [Op.or]: {
+                name: { [Op.like]: `%${search}%` },
+                description: { [Op.like]: `%${search}%` }
+            }
+        }
+    })
+    console.log(result)
+    return result
+}
 
 export default Conditions;

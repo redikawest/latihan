@@ -34,12 +34,17 @@ export const loginLogic = async (body, res) => {
             return errorResponse(res, 403, ERR_ACCOUNT_BANNED)
         }
 
-        const passwordCheck = await comparePassword(userBody.password, user.password)
+        const passwordCheck = await comparePassword(body.password, user.password)
         if (!passwordCheck) {
             return errorResponse(res, 403, ERR_AUTH_PASSWORD_NOT_MATCH)
         }
 
-        const token = await generateToken(user);
+        const data = {
+            email: user.email,
+            role: user.role,
+            status: user.status
+        }
+        const token = await generateToken(data);
 
         return successResponse(res, SUCCESS_LOGIN, token)
         

@@ -42,7 +42,7 @@ Categories.prototype.filter = async function(limit, offset, search) {
         }
     })
 
-    return categoryParser.basic(result)
+    return result
 }
 
 export default Categories;

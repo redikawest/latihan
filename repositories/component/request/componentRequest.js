@@ -1,5 +1,5 @@
-export const create = (body) => {
-    body.createdBy = 'test'
+export const create = (body, user) => {
+    body.createdBy = user.email
 
     return body
 }
