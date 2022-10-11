@@ -30,17 +30,20 @@ export const deleteData = async (model, body) => {
 }
 
 export const pagination = async (page, size) => {
+
     const limit = size ? +size : 3;
-    const offset = page ? page * limit : 0;
+    const offset = page ? (page - 1) * limit : 0;
   
     return { limit, offset };
 }
 
 export const getPagingData = async (data, page, limit) => {
-    const totalItems = data.count
-    const datas = data.rows
-    const currentPage = page ? +page : 0;
-    const totalPages = Math.ceil(totalItems / limit);
     
-    return { totalItems, datas, totalPages, currentPage };
+    return { 
+        size: limit, 
+        total: data.count, 
+        totalPages: Math.ceil(data.count / limit), 
+        currentPage: page + 1,
+        data: data.rows 
+    };
 }

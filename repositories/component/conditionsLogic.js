@@ -13,7 +13,8 @@ export const gets = async (req, res) => {
     const { limit, offset } = await pagination(page, size);
     
     const data = await Conditions.prototype.filter(limit, offset, search)
-    const result = await getPagingData(data, page, limit)
+    const result = await getPagingData(data, offset, limit)
+    
     return successResponse(res, SUCCESS, result)
 }
 

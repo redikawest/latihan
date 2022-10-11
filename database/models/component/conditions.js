@@ -41,9 +41,10 @@ const Conditions = maindb.define('conditions',{
                 name: { [Op.like]: `%${search}%` },
                 description: { [Op.like]: `%${search}%` }
             }
-        }
+        }, raw: true
     })
-    console.log(result)
+
+    result.rows = componentParser.gets(result.rows)
     return result
 }
 
