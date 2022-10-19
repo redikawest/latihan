@@ -1,6 +1,5 @@
 import { Op } from "sequelize";
 import maindb from "../../../config/sequelize";
-import * as categoryParser from "../../../parsers/component/categoryParser"
 
 const Categories = maindb.define('categories',{
     id: {

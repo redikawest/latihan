@@ -13,7 +13,7 @@ import { SUCCESS_LOGIN } from "../../helpers/Constant/successConstant";
 import { createData, getDataWhere } from "../../helpers/query";
 import { errorResponse, successResponse } from "../../helpers/response";
 import { generateToken } from "../../middleware/auth/authentication";
-import { userCreate } from "../../parsers/user";
+import { userCreate } from "../../helpers/parsers/user";
 import { parseStringifyData } from "../../utils/parse";
 import * as request from "./request/authRequest"
 

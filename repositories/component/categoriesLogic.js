@@ -5,7 +5,7 @@ import { SUCCESS, SUCCESS_CATEGORY_DELETE, SUCCESS_CATEGORY_UPDATE, SUCCESS_CATE
 import { createData, getDataWhere, getPagingData, pagination, updateData } from "../../helpers/query"
 import { errorResponse, successResponse } from "../../helpers/response"
 import { parseStringifyData } from "../../utils/parse"
-import * as parser from "../../parsers/component/categoryParser"
+import * as parser from "../../helpers/parsers/component/categoryParser"
 import * as request from "./request/componentRequest"
 
 export const gets = async (req, res) => {
