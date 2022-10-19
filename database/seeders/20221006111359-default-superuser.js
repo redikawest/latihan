@@ -4,8 +4,6 @@ const { bcryptPassword } = require("../../helpers/bcrypt");
 const { ADMIN_ID } = require("../../helpers/Constant/roleConstant");
 const { MALE_ID } = require("../../helpers/Constant/sexConstant");
 const { ACTIVE_ID } = require("../../helpers/Constant/statusConstant");
-const { default: Admins } = require("../models/admins");
-const { default: Users } = require("../models/user");
 
 module.exports = {
   async up (queryInterface, Sequelize) {

@@ -1,8 +1,0 @@
-[32minfo[39m: Error: WHERE parameter "name" has invalid "undefined" value
-[32minfo[39m: Error: WHERE parameter "name" has invalid "undefined" value
-[32minfo[39m: SequelizeDatabaseError: Field 'name' doesn't have a default value
-[32minfo[39m: SequelizeDatabaseError: Field 'name' doesn't have a default value
-[32minfo[39m: SequelizeDatabaseError: Field 'name' doesn't have a default value
-[32minfo[39m: SequelizeValidationError: notNull Violation: conditions.createdBy cannot be null
-[32minfo[39m: SequelizeValidationError: notNull Violation: conditions.createdBy cannot be null
-[32minfo[39m: SequelizeValidationError: notNull Violation: conditions.createdBy cannot be null

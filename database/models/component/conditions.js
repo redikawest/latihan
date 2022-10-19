@@ -1,6 +1,6 @@
 import { Op } from "sequelize";
 import maindb from "../../../config/sequelize";
-import * as componentParser from "../../../parsers/component/componentParser"
+import * as componentParser from "../../../helpers/parsers/component/componentParser"
 
 const Conditions = maindb.define('conditions',{
     id: {

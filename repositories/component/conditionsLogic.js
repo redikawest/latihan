@@ -1,11 +1,11 @@
 import { logger } from "../../config/logger"
 import Conditions from "../../database/models/component/conditions"
-import { ERR_CONDITIONS_EXIST, ERR_CONDITIONS_NOT_FOUND, ERR_CONDITION_CREATE, ERR_CONDITION_DELETE, ERR_CONDITION_UPDATE } from "../../helpers/Constant/errorConstant"
+import { ERR_CONDITIONS_EXIST, ERR_CONDITIONS_NOT_FOUND } from "../../helpers/Constant/errorConstant"
 import { SUCCESS, SUCCESS_CONDITION_CREATE, SUCCESS_CONDITION_DELETE, SUCCESS_CONDITION_UPDATE } from "../../helpers/Constant/successConstant"
 import { createData, getDataWhere, getPagingData, pagination, updateData } from "../../helpers/query"
 import { errorResponse, successResponse } from "../../helpers/response"
 import * as conditionRequest from "./request/componentRequest"
-import * as parser from "../../parsers/component/componentParser"
+import * as parser from "../../helpers/parsers/component/componentParser"
 import { parseStringifyData } from "../../utils/parse"
 
 export const gets = async (req, res) => {
